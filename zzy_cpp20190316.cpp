@@ -79,6 +79,28 @@ public:
 		return false;
 	}
 
+	bool empty()
+	{
+		if (nullptr == mphead->mpnext)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	int front()
+	{
+		return mphead->mpnext->mdata;
+	}
+
+	void deletefront()
+	{
+		Node *mnode = mphead;
+		Node *mmnode = mphead->mpnext;
+		mnode->mpnext = mmnode->mpnext;
+		delete mmnode;
+	}
+
 	void show()
 	{
 		Node *mnode = mphead->mpnext;
@@ -632,13 +654,14 @@ private:
 		fclose(mflie);
 		mflie = nullptr;
 		
-		/*mflie=fopen("Link.txt", "w");
-		while (mlink.)
+		mflie=fopen("Link.txt", "w");
+		while (!mlink.empty())
 		{
-
+			fprintf(mflie, "%d ", mlink.front());
+			mlink.deletefront();
 		}
 		fclose(mflie);
-		mflie = nullptr;*/
+		mflie = nullptr;
 		cout << "数据保存成功... ..." << endl;
 	}
 	void ReadInFile()		//读入文件数据
